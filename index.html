@@ -57,6 +57,7 @@
             background: linear-gradient(-45deg, #e0e7ff, #f5f3ff, #ede9fe, #e0e7ff);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
         }
 
         .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
@@ -118,8 +119,8 @@
         /* WhatsApp Button Styles */
         .whatsapp-float {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 20px;
+            right: 20px;
             z-index: 100;
             transition: all 0.3s ease;
         }
@@ -128,13 +129,14 @@
         }
         .whatsapp-panel {
             position: fixed;
-            bottom: 90px;
-            right: 30px;
-            width: 300px;
+            bottom: 80px;
+            right: 20px;
+            width: calc(100% - 40px);
+            max-width: 300px;
             background: white;
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            padding: 20px;
+            padding: 15px;
             z-index: 99;
             transform: translateY(20px);
             opacity: 0;
@@ -146,16 +148,75 @@
             opacity: 1;
             visibility: visible;
         }
+
+        /* Responsive Adjustments */
+        @media (max-width: 640px) {
+            .card-glass {
+                border-radius: 1.5rem !important;
+            }
+            .main-heading {
+                font-size: 2rem !important;
+                line-height: 2.5rem !important;
+            }
+            .personalized-greeting h2 {
+                font-size: 1.5rem !important;
+            }
+            .message-text {
+                font-size: 1rem !important;
+                padding: 0 0.5rem !important;
+            }
+            .feature-box {
+                width: 100% !important;
+                margin-bottom: 0.5rem !important;
+            }
+            .button-group {
+                flex-direction: column !important;
+            }
+            .button-group button {
+                width: 100% !important;
+                margin-bottom: 0.75rem !important;
+            }
+            .motivation-panel {
+                padding: 1rem !important;
+            }
+            .footer-content {
+                flex-direction: column !important;
+                text-align: center !important;
+            }
+            .counter-group {
+                margin-top: 0.5rem !important;
+                justify-content: center !important;
+            }
+            .floating-icon {
+                width: 18px !important;
+                height: 18px !important;
+                font-size: 0.875rem !important;
+            }
+            .whatsapp-btn {
+                width: 50px !important;
+                height: 50px !important;
+                font-size: 1.5rem !important;
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 768px) {
+            .main-heading {
+                font-size: 2.5rem !important;
+            }
+            .personalized-greeting h2 {
+                font-size: 1.75rem !important;
+            }
+        }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 antialiased">
+<body class="flex items-center justify-center p-4 antialiased">
     <!-- Audio Element -->
     <audio id="bgMusic" loop>
         <source src="https://audio.jukehost.co.uk/5bA9Q1b4g5J5jF2B4J1d9j8Q9x4d5bA9" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
-    <div class="max-w-3xl w-full mx-4">
+    <div class="w-full max-w-3xl mx-auto">
         <!-- Main Card -->
         <div class="card-glass rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-xl relative">
             <!-- Progress Bar -->
@@ -164,117 +225,116 @@
             </div>
             
             <!-- Floating Decorations -->
-            <div class="absolute -top-6 -left-6 w-24 h-24 rounded-full bg-indigo-100/40 animate__animated animate__pulse animate__infinite"></div>
-            <div class="absolute -bottom-6 -right-6 w-28 h-28 rounded-full bg-purple-100/40 animate__animated animate__pulse animate__infinite animate__delay-1s"></div>
-            <div class="absolute top-1/4 -right-8 w-16 h-16 rounded-lg bg-blue-100/30 rotate-45 animate__animated animate__pulse animate__infinite animate__delay-2s"></div>
+            <div class="absolute -top-6 -left-6 w-24 h-24 rounded-full bg-indigo-100/40 animate__animated animate__pulse animate__infinite hidden sm:block"></div>
+            <div class="absolute -bottom-6 -right-6 w-28 h-28 rounded-full bg-purple-100/40 animate__animated animate__pulse animate__infinite animate__delay-1s hidden sm:block"></div>
+            <div class="absolute top-1/4 -right-8 w-16 h-16 rounded-lg bg-blue-100/30 rotate-45 animate__animated animate__pulse animate__infinite animate__delay-2s hidden sm:block"></div>
             
-            <div class="p-8 sm:p-12 text-center relative z-10">
+            <div class="p-6 sm:p-8 md:p-12 text-center relative z-10">
                 <!-- Header Section -->
                 <div class="flex justify-between items-start mb-2">
                     <div class="text-left opacity-0 animate-fade-in" style="animation-delay: 0.3s;">
-                        <p class="text-sm text-indigo-400 font-medium">Special Message</p>
+                        <p class="text-xs sm:text-sm text-indigo-400 font-medium">Special Message</p>
                         <p class="text-xs text-indigo-300">Seminar Proposal</p>
                     </div>
-                   <!-- Audio Player (disembunyikan) -->
-<audio id="background-music" src="videoplayback.mp3" loop></audio>
+                    <!-- Audio Player (hidden) -->
+                    <audio id="background-music" src="videoplayback.mp3" loop></audio>
 
-<!-- Tombol Musik dengan Tooltip -->
-<div class="tooltip opacity-0 animate-fade-in" style="animation-delay: 0.5s;">
-    <button id="music-toggle" class="w-8 h-8 rounded-full bg-white/80 shadow-sm flex items-center justify-center text-indigo-500 hover:bg-indigo-50 transition-all">
-        <i class="fas fa-music text-sm"></i>
-    </button>
-    <span class="tooltip-text absolute -right-2 -top-10 bg-white text-xs text-indigo-600 px-2 py-1 rounded shadow-sm whitespace-nowrap transform translate-y-1">
-        Putar Musik
-    </span>
-</div>
+                    <!-- Music Button with Tooltip -->
+                    <div class="tooltip opacity-0 animate-fade-in" style="animation-delay: 0.5s;">
+                        <button id="music-toggle" class="w-8 h-8 rounded-full bg-white/80 shadow-sm flex items-center justify-center text-indigo-500 hover:bg-indigo-50 transition-all">
+                            <i class="fas fa-music text-sm"></i>
+                        </button>
+                        <span class="tooltip-text absolute -right-2 -top-10 bg-white text-xs text-indigo-600 px-2 py-1 rounded shadow-sm whitespace-nowrap transform translate-y-1">
+                            Putar Musik
+                        </span>
+                    </div>
 
-<!-- Script untuk Toggle Musik -->
-<script>
-    const musicToggle = document.getElementById('music-toggle');
-    const backgroundMusic = document.getElementById('background-music');
-    let isPlaying = false;
+                    <!-- Script for Music Toggle -->
+                    <script>
+                        const musicToggle = document.getElementById('music-toggle');
+                        const backgroundMusic = document.getElementById('background-music');
+                        let isPlaying = false;
 
-    musicToggle.addEventListener('click', () => {
-        if (isPlaying) {
-            backgroundMusic.pause();
-        } else {
-            backgroundMusic.play();
-        }
-        isPlaying = !isPlaying;
-    });
-</script>
-
+                        musicToggle.addEventListener('click', () => {
+                            if (isPlaying) {
+                                backgroundMusic.pause();
+                            } else {
+                                backgroundMusic.play();
+                            }
+                            isPlaying = !isPlaying;
+                        });
+                    </script>
                 </div>
                 
                 <!-- Personalized Greeting -->
-                <div class="mb-6 opacity-0 animate-fade-in" style="animation-delay: 0.7s;">
-                    <p class="text-indigo-400 font-medium mb-1">Untuk Yang Terhebat</p>
-                    <h2 class="text-3xl font-bold celebrate-text mt-2">Fikri Fahreza & Nurul Izzati</h2>
+                <div class="mb-4 sm:mb-6 opacity-0 animate-fade-in personalized-greeting" style="animation-delay: 0.7s;">
+                    <p class="text-indigo-400 font-medium mb-1 text-sm sm:text-base">Untuk Yang Terhebat</p>
+                    <h2 class="text-2xl sm:text-3xl font-bold celebrate-text mt-2">Fikri Fahreza & Nurul Izzati</h2>
                     <div class="w-16 h-0.5 bg-indigo-200 mx-auto mt-3 rounded-full"></div>
                 </div>
                 
                 <!-- Main Heading -->
-                <h1 id="main-heading" class="text-4xl sm:text-5xl font-extrabold text-indigo-600 mb-8 mx-auto inline-block"></h1>
+                <h1 id="main-heading" class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-indigo-600 mb-6 sm:mb-8 mx-auto inline-block main-heading"></h1>
                 
                 <!-- Animated Icon -->
-                <div class="my-8 opacity-0 animate-fade-in" style="animation-delay: 2.2s;">
-                    <div class="w-24 h-24 mx-auto bg-white/90 rounded-full flex items-center justify-center shadow-md floating">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <div class="my-6 sm:my-8 opacity-0 animate-fade-in" style="animation-delay: 2.2s;">
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 mx-auto bg-white/90 rounded-full flex items-center justify-center shadow-md floating">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 sm:h-12 sm:w-12 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
                 </div>
                 
                 <!-- Messages Section -->
-                <div class="space-y-4 mb-8">
-                    <p class="text-gray-700 text-lg leading-relaxed opacity-0 animate-fade-in" style="animation-delay: 2.5s;">
+                <div class="space-y-4 mb-6 sm:mb-8">
+                    <p class="text-gray-700 text-base sm:text-lg leading-relaxed opacity-0 animate-fade-in message-text" style="animation-delay: 2.5s;">
                         <i class="fas fa-quote-left text-indigo-200 mr-2"></i>
                         <span id="main-message">Semoga Seminar Proposalmu berjalan dengan lancar dan sukses!</span>
                         <i class="fas fa-quote-right text-indigo-200 ml-2"></i>
                     </p>
                     
-                    <div class="flex flex-wrap justify-center gap-4 mt-6">
-                        <div class="bg-white/80 p-4 rounded-xl shadow-sm w-full sm:w-auto opacity-0 animate-fade-in" style="animation-delay: 2.8s;">
+                    <div class="flex flex-wrap justify-center gap-3 sm:gap-4 mt-4 sm:mt-6">
+                        <div class="bg-white/80 p-3 sm:p-4 rounded-xl shadow-sm w-full sm:w-auto opacity-0 animate-fade-in feature-box" style="animation-delay: 2.8s;">
                             <div class="flex items-center justify-center space-x-2">
-                                <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
-                                    <i class="fas fa-brain text-sm"></i>
+                                <div class="w-7 h-7 sm:w-8 sm:h-8 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 floating-icon">
+                                    <i class="fas fa-brain text-xs sm:text-sm"></i>
                                 </div>
-                                <p class="text-gray-700 font-medium">Presentasi Memukau</p>
+                                <p class="text-gray-700 font-medium text-sm sm:text-base">Presentasi Memukau</p>
                             </div>
                         </div>
                         
-                        <div class="bg-white/80 p-4 rounded-xl shadow-sm w-full sm:w-auto opacity-0 animate-fade-in" style="animation-delay: 3.1s;">
+                        <div class="bg-white/80 p-3 sm:p-4 rounded-xl shadow-sm w-full sm:w-auto opacity-0 animate-fade-in feature-box" style="animation-delay: 3.1s;">
                             <div class="flex items-center justify-center space-x-2">
-                                <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
-                                    <i class="fas fa-book-open text-sm"></i>
+                                <div class="w-7 h-7 sm:w-8 sm:h-8 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 floating-icon">
+                                    <i class="fas fa-book-open text-xs sm:text-sm"></i>
                                 </div>
-                                <p class="text-gray-700 font-medium">Penguasaan Materi</p>
+                                <p class="text-gray-700 font-medium text-sm sm:text-base">Penguasaan Materi</p>
                             </div>
                         </div>
                         
-                        <div class="bg-white/80 p-4 rounded-xl shadow-sm w-full sm:w-auto opacity-0 animate-fade-in" style="animation-delay: 3.4s;">
+                        <div class="bg-white/80 p-3 sm:p-4 rounded-xl shadow-sm w-full sm:w-auto opacity-0 animate-fade-in feature-box" style="animation-delay: 3.4s;">
                             <div class="flex items-center justify-center space-x-2">
-                                <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
-                                    <i class="fas fa-star text-sm"></i>
+                                <div class="w-7 h-7 sm:w-8 sm:h-8 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 floating-icon">
+                                    <i class="fas fa-star text-xs sm:text-sm"></i>
                                 </div>
-                                <p class="text-gray-700 font-medium">Hasil Terbaik</p>
+                                <p class="text-gray-700 font-medium text-sm sm:text-base">Hasil Terbaik</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Interactive Section -->
-                <div class="mt-8 space-y-4 sm:space-y-0 sm:space-x-4 flex flex-col sm:flex-row justify-center">
+                <div class="mt-6 sm:mt-8 space-y-3 sm:space-y-0 sm:space-x-3 md:space-x-4 flex flex-col sm:flex-row justify-center button-group">
                     <!-- Main Button -->
-                    <button id="celebrate-btn" class="btn-primary text-white font-semibold py-3 px-8 rounded-full shadow-lg opacity-0 animate-fade-in hover:shadow-xl relative overflow-hidden group" style="animation-delay: 3.7s;">
-                        <span class="relative z-10 flex items-center justify-center">
+                    <button id="celebrate-btn" class="btn-primary text-white font-semibold py-2 px-6 sm:py-3 sm:px-8 rounded-full shadow-lg opacity-0 animate-fade-in hover:shadow-xl relative overflow-hidden group" style="animation-delay: 3.7s;">
+                        <span class="relative z-10 flex items-center justify-center text-sm sm:text-base">
                             <i class="fas fa-sparkles mr-2"></i> Rayakan Kesuksesan!
                         </span>
                         <span class="absolute inset-0 bg-white/10 group-hover:bg-white/20 transition-all duration-300"></span>
                     </button>
                     
                     <!-- Secondary Button -->
-                    <button id="motivation-btn" class="btn-secondary bg-white text-indigo-600 font-medium py-3 px-6 rounded-full border border-indigo-100 shadow-sm opacity-0 animate-fade-in hover:bg-indigo-50" style="animation-delay: 4s;">
+                    <button id="motivation-btn" class="btn-secondary bg-white text-indigo-600 font-medium py-2 px-4 sm:py-3 sm:px-6 rounded-full border border-indigo-100 shadow-sm opacity-0 animate-fade-in hover:bg-indigo-50 text-sm sm:text-base" style="animation-delay: 4s;">
                         <i class="fas fa-heart mr-2 text-pink-400 heartbeat"></i> Motivasi Baru
                     </button>
                 </div>
@@ -283,20 +343,20 @@
                 <div id="confetti" class="fixed inset-0 pointer-events-none opacity-0 transition-opacity duration-500 z-20"></div>
                 
                 <!-- Motivation Panel -->
-                <div id="motivation-panel" class="mt-8 bg-white/90 rounded-xl p-6 shadow-sm hidden animate__animated">
+                <div id="motivation-panel" class="mt-6 sm:mt-8 bg-white/90 rounded-xl p-4 sm:p-6 shadow-sm hidden animate__animated motivation-panel">
                     <div class="flex items-start">
-                        <div class="flex-shrink-0 mr-4">
-                            <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
-                                <i class="fas fa-quote-left"></i>
+                        <div class="flex-shrink-0 mr-3 sm:mr-4">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
+                                <i class="fas fa-quote-left text-sm sm:text-base"></i>
                             </div>
                         </div>
                         <div>
-                            <p class="text-gray-700 italic mb-3" id="motivation-text">
-                                "Fikri Fahreza & Nurul Izzatigit, kamu sudah bekerja keras sampai sejauh ini. Seminar Proposal hanyalah formalitas karena sebenarnya kamu sudah menguasai materinya dengan sangat baik."
+                            <p class="text-gray-700 italic mb-2 sm:mb-3 text-sm sm:text-base" id="motivation-text">
+                                "Fikri Fahreza & Nurul Izzati, kamu sudah bekerja keras sampai sejauh ini. Seminar Proposal hanyalah formalitas karena sebenarnya kamu sudah menguasai materinya dengan sangat baik."
                             </p>
                             <div class="flex justify-between items-center">
-                                <p class="text-sm text-indigo-400 font-medium">- Support System</p>
-                                <button id="new-quote" class="text-xs bg-indigo-50 text-indigo-500 px-3 py-1 rounded-full hover:bg-indigo-100 transition-colors">
+                                <p class="text-xs sm:text-sm text-indigo-400 font-medium">- Support System</p>
+                                <button id="new-quote" class="text-xs bg-indigo-50 text-indigo-500 px-2 py-1 sm:px-3 sm:py-1 rounded-full hover:bg-indigo-100 transition-colors">
                                     <i class="fas fa-sync-alt mr-1"></i> Quote Baru
                                 </button>
                             </div>
@@ -305,9 +365,9 @@
                 </div>
                 
                 <!-- Celebration Message -->
-                <div id="celebration-message" class="mt-6 hidden">
-                    <div class="bg-gradient-to-r from-indigo-100 to-purple-100 p-4 rounded-xl animate__animated animate__fadeInUp">
-                        <p class="text-indigo-700 font-medium">
+                <div id="celebration-message" class="mt-4 sm:mt-6 hidden">
+                    <div class="bg-gradient-to-r from-indigo-100 to-purple-100 p-3 sm:p-4 rounded-xl animate__animated animate__fadeInUp">
+                        <p class="text-indigo-700 font-medium text-sm sm:text-base">
                             <i class="fas fa-heart text-pink-400 mr-2"></i> 
                             <span id="personal-message">Fikri Fahreza & Nurul Izzati, kamu pasti bisa! Semangat menggapai impianmu!</span>
                         </p>
@@ -316,15 +376,15 @@
             </div>
             
             <!-- Footer -->
-            <div class="bg-white/70 py-4 px-6 text-center text-indigo-400 text-sm flex flex-col sm:flex-row justify-between items-center border-t border-indigo-50">
+            <div class="bg-white/70 py-3 px-4 sm:py-4 sm:px-6 text-center text-indigo-400 text-xs sm:text-sm flex flex-col sm:flex-row justify-between items-center border-t border-indigo-50 footer-content">
                 <div class="mb-2 sm:mb-0">
                     <i class="fas fa-flask text-indigo-300 mr-1"></i> Semangat penelitiannya!
                 </div>
-                <div class="flex items-center space-x-3">
-                    <div id="time-counter" class="bg-white/80 px-3 py-1 rounded-full text-xs shadow-sm">
+                <div class="flex items-center space-x-2 sm:space-x-3 counter-group">
+                    <div id="time-counter" class="bg-white/80 px-2 py-1 sm:px-3 sm:py-1 rounded-full shadow-sm">
                         <i class="far fa-clock mr-1"></i> <span>00:00</span>
                     </div>
-                    <div id="click-counter" class="bg-white/80 px-3 py-1 rounded-full text-xs shadow-sm">
+                    <div id="click-counter" class="bg-white/80 px-2 py-1 sm:px-3 sm:py-1 rounded-full shadow-sm">
                         <i class="far fa-hand-pointer mr-1"></i> <span>0</span> clicks
                     </div>
                 </div>
@@ -337,16 +397,16 @@
 
     <!-- WhatsApp Floating Button -->
     <div class="whatsapp-float">
-        <button id="whatsapp-btn" class="w-16 h-16 bg-green-500 rounded-full shadow-lg flex items-center justify-center text-white text-2xl hover:bg-green-600 transition-all">
+        <button id="whatsapp-btn" class="w-12 h-12 sm:w-14 sm:h-14 bg-green-500 rounded-full shadow-lg flex items-center justify-center text-white text-xl sm:text-2xl hover:bg-green-600 transition-all whatsapp-btn">
             <i class="fab fa-whatsapp"></i>
         </button>
     </div>
 
     <!-- WhatsApp Panel -->
     <div id="whatsapp-panel" class="whatsapp-panel">
-        <h3 class="font-bold text-gray-800 mb-3">Kirim Pesan Dukungan</h3>
-        <textarea id="whatsapp-message" class="w-full p-3 border border-gray-200 rounded-lg mb-3 focus:outline-none focus:ring-2 focus:ring-green-400" rows="4" placeholder="Tulis pesan untuk Felix..."></textarea>
-        <button id="send-whatsapp" class="w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition flex items-center justify-center">
+        <h3 class="font-bold text-gray-800 mb-2 sm:mb-3 text-sm sm:text-base">Kirim Pesan Dukungan</h3>
+        <textarea id="whatsapp-message" class="w-full p-2 sm:p-3 border border-gray-200 rounded-lg mb-2 sm:mb-3 focus:outline-none focus:ring-2 focus:ring-green-400 text-sm sm:text-base" rows="4" placeholder="Tulis pesan untuk Fikri & Nurul..."></textarea>
+        <button id="send-whatsapp" class="w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition flex items-center justify-center text-sm sm:text-base">
             <i class="fab fa-whatsapp mr-2"></i> Kirim via WhatsApp
         </button>
     </div>
@@ -382,10 +442,10 @@
                 "Selamat atas Seminar Proposalmu! Ini adalah langkah besar menuju kesuksesan akademismu.",
                 "Semoga Seminar Proposalmu berjalan dengan lancar dan sukses!",
                 "Kami semua percaya padamu! Kamu akan melakukan yang terbaik di Seminar Proposal ini.",
-                "Seminar Proposal adalah gerbang menuju penelitian yang lebih dalam. Semangat Fikri Fahreza & Nurul Izzatigit!",
+                "Seminar Proposal adalah gerbang menuju penelitian yang lebih dalam. Semangat Fikri Fahreza & Nurul Izzati!",
                 "Kamu sudah bekerja keras untuk ini. Sekarang saatnya bersinar di Seminar Proposal!",
                 "Selamat menempuh Seminar Proposal! Semoga semua berjalan sesuai harapan.",
-                "Ini adalah momen penting dalam perjalanan akademismu. Semoga sukses Fikri Fahreza & Nurul Izzatigit!",
+                "Ini adalah momen penting dalam perjalanan akademismu. Semoga sukses Fikri Fahreza & Nurul Izzati!",
                 "Kami semua mendukungmu! Semoga Seminar Proposal berjalan lancar."
             ];
             
@@ -525,7 +585,7 @@
             
             sendWhatsappBtn.addEventListener('click', function() {
                 const phoneNumber = "62882017748698"; // Replace with actual WhatsApp number
-                const defaultMessage = "Hiii Felix..... 🎉";
+                const defaultMessage = "Hiii Fikri & Nurul..... 🎉";
                 const customMessage = whatsappMessage.value.trim() || defaultMessage;
                 const encodedMessage = encodeURIComponent(customMessage);
                 
@@ -614,17 +674,17 @@
             
             function showPersonalMessage() {
                 const messages = [
-                    "Fikri Fahreza & Nurul Izzatigit, kamu pasti bisa! Semangat menggapai impianmu!",
+                    "Fikri Fahreza & Nurul Izzati, kamu pasti bisa! Semangat menggapai impianmu!",
                     "Kamu adalah wanita kuat dan cerdas. Sidang ini akan berjalan lancar!",
-                    "Aku percaya padamu, Fikri Fahreza & Nurul Izzatigit! Presentasikan dengan penuh percaya diri!",
-                    "Karya terbaikmu akan bersinar hari ini. Semangat Fikri Fahreza & Nurul Izzatigit!",
+                    "Aku percaya padamu, Fikri Fahreza & Nurul Izzati! Presentasikan dengan penuh percaya diri!",
+                    "Karya terbaikmu akan bersinar hari ini. Semangat Fikri Fahreza & Nurul Izzati!",
                     "Dengan persiapanmu yang matang, hasil terbaik sudah di depan mata!",
                     "Tunjukkan pada mereka kemampuanmu yang luar biasa! Kamu bisa!",
                     "Senyummu adalah senjata terbaik. Tunjukkan pada mereka!",
                     "Ini adalah momenmu untuk bersinar. Lakukan yang terbaik!",
                     "Selamat atas Seminar Proposalmu! Ini awal yang baik untuk penelitianmu.",
                     "Kami semua bangga dengan pencapaianmu! Semoga sukses selalu.",
-                    "Semangat Fikri Fahreza & Nurul Izzatigit! Kamu sudah bekerja keras untuk ini.",
+                    "Semangat Fikri Fahreza & Nurul Izzati! Kamu sudah bekerja keras untuk ini.",
                     "Seminar Proposal adalah bukti dedikasimu. Kamu hebat!",
                     "Kami yakin kamu akan memberikan yang terbaik! Semangat!",
                     "Selamat menempuh Seminar Proposal! Semoga lancar dan sukses.",
@@ -650,9 +710,9 @@
             
             function getNewMotivationalQuote() {
                 const quotes = [
-                    '"Fikri Fahreza & Nurul Izzatigit, percayalah pada kemampuanmu sendiri. Kamu sudah mempersiapkan ini dengan sangat matang!"',
+                    '"Fikri Fahreza & Nurul Izzati, percayalah pada kemampuanmu sendiri. Kamu sudah mempersiapkan ini dengan sangat matang!"',
                     '"Seminar Proposal hanyalah langkah kecil dalam perjalanan besar penelitianmu. Kamu pasti bisa!"',
-                    '"Ingat, semua kerja kerasmu selama ini akan terbayar. Semangat Fikri Fahreza & Nurul Izzatigit!"',
+                    '"Ingat, semua kerja kerasmu selama ini akan terbayar. Semangat Fikri Fahreza & Nurul Izzati!"',
                     '"Dosen penguji akan terkesan dengan penguasaan materi dan presentasimu. Yakinlah!"',
                     '"Kamu lebih kuat dari yang kamu kira. Ini adalah momen untuk bersinar!"',
                     '"Setiap pertanyaan dari penguji adalah kesempatan untuk menunjukkan kedalaman pemahamanmu."',
@@ -661,7 +721,7 @@
                     '"Kamu sudah melalui proses yang panjang untuk sampai di sini. Nikmati momen ini!"',
                     '"Percayalah pada dirimu sendiri seperti kami percaya padamu. Kamu bisa!"',
                     '"Seminar Proposal adalah formalitas saja. Kamu sudah lebih dari siap!"',
-                    '"Semangat Fikri Fahreza & Nurul Izzatigit! Kami semua mendukungmu dari sini."',
+                    '"Semangat Fikri Fahreza & Nurul Izzati! Kami semua mendukungmu dari sini."',
                     '"Kamu adalah mahasiswa berprestasi. Tunjukkan kualitas terbaikmu!"',
                     '"Selamat menempuh Seminar Proposal! Semoga sukses dan lancar."',
                     '"Kami tahu kamu bisa melewati ini dengan hasil terbaik. Semangat!"',
